@@ -1,25 +1,27 @@
-const Favourites = () => {
+import {memo} from "react";
+import {BsTrash3} from 'react-icons/bs';
+
+const Favourites = ({ favouriteRecipes, recipeCardClickHandler }) => {
     return (
-        <div className="favourites">
-            <div id="fav_section_title">Favourites</div>
-            <div className="fav_items">
-                <div className="fav_item">
-                    <img src="https://media.istockphoto.com/id/488481490/photo/fish-biryani-with-basmati-rice-indian-food.jpg?s=612x612&w=0&k=20&c=9xEw3VOQSz9TP8yQr60L47uExyKF9kogRhQdlghlC00=" alt="" />
-                    <div className="title">Biryani</div>
+        <div>
+            {favouriteRecipes.length > 0 && (
+                <div className="favourites">
+                    <div id="fav_section_title">Favourites</div>
+                    <div className="fav_items">
+                        {favouriteRecipes.map((favRecipe) => {
+                            return (
+                                <div key={favRecipe.idMeal} className="fav_item" onClick={(event) => recipeCardClickHandler(event, favRecipe.idMeal, "showModal")}>
+                                    <img src={favRecipe.strMealThumb} alt="" />
+                                    <BsTrash3 className="trash_icon" onClick={(event) => recipeCardClickHandler(event, favRecipe.idMeal, "removeFromFav")} />
+                                    <div className="title">{favRecipe.strMeal}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
-
-                <div className="fav_item">
-                    <img src="https://media.istockphoto.com/id/488481490/photo/fish-biryani-with-basmati-rice-indian-food.jpg?s=612x612&w=0&k=20&c=9xEw3VOQSz9TP8yQr60L47uExyKF9kogRhQdlghlC00=" alt="" />
-                    <div className="title">Biryani</div>
-                </div>
-
-                <div className="fav_item">
-                    <img src="https://media.istockphoto.com/id/488481490/photo/fish-biryani-with-basmati-rice-indian-food.jpg?s=612x612&w=0&k=20&c=9xEw3VOQSz9TP8yQr60L47uExyKF9kogRhQdlghlC00=" alt="" />
-                    <div className="title">Biryani</div>
-                </div>
-            </div>
+            )}
         </div>
     )
 }
 
-export default Favourites;
+export default memo(Favourites);
