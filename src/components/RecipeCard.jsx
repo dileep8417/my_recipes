@@ -14,7 +14,7 @@ const RecipeCard = ({ recipe, favouriteRecipes, recipeCardClickHandler }) => {
 
     return (
         <div className="card" onClick={(event) => recipeCardClickHandler(event, idMeal, "showModal")}>
-            <img src={strMealThumb} alt="" />
+            <img src={strMealThumb + "/preview"} alt="" />
             <div className="card_body">
                 <div className="row">
                     <div className="country"><MdLocationPin className="card_icons" />{strArea}</div>
